@@ -1,17 +1,23 @@
-import playwright from 'playwright-aws-lambda';
+// import playwright from 'playwright-aws-lambda';
+import puppeteer from 'puppeteer';
+import edgeChromium from 'chrome-aws-lambda';
+
+const TEST_URL =
+	'https://buyee.jp/item/search/query/%E5%B2%A9%E5%B4%8E%E5%AE%8F%E7%BE%8E%20Me%20too/category/22260?translationType=1';
 
 async function testBrower() {
-	const browser = await playwright.launchChromium({
+	const browser = await puppeteer.launch({
+		args: edgeChromium.args,
+		defaultViewport: edgeChromium.defaultViewport,
+		executablePath: await edgeChromium.executablePath,
 		headless: true
 	});
 
-	const context = await browser.newContext();
-	const page = await context.newPage();
-	await page.goto('https://example.com');
-	const pageTitle = await page.title();
+	const page = await browser.newPage();
+	await page.goto(TEST_URL);
+	const title = await page.title();
 	await browser.close();
-
-	return pageTitle;
+	return title;
 }
 
 export default async function handler(req, res) {
