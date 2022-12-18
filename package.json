@@ -31,7 +31,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@sparticuz/chromium": "^109.0.0",
-		"puppeteer-core": "^19.4.0"
+		"playwright": "^1.29.0"
 	}
 }
