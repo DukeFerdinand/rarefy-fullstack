@@ -1,0 +1,64 @@
+/* :root {
+	--danger: #ff4136;
+	--warning: #ff851b;
+	--info: #39cccc;
+	--success: #2ecc40;
+	--primary: #b10dc9;
+	--dark-grey: #111111;
+	--yellow: #f1c40f;
+	--blue: #3498db;
+	--red-orange: #e74c3c;
+	--turquoise: #1abc9c;
+} */
+
+/* #56626f; 
+    #85929e - a medium grey color
+    #bcc5ce - a light grey color
+    #0d1119 - a very dark blue-grey color
+    #2c2f3e - a darker shade of blue-grey
+    #808b96 - a medium blue-grey color */
+
+/* :root {
+	--neutral-background: #1f2833;
+	--neutral-background-dark: #0b0c10;
+	--highlight: #66fcf1;
+	--secondary-button: #45a29e;
+	--error: #e54b4b;
+	--warning: #f7b733;
+	--secondary: #155799;
+	--danger: #d66d75;
+	--info: #82ccdd;
+	--success: #b2dbbf;
+	--primary: #7e5109;
+} */
+
+:root {
+	--primary-color: #1e1e1e;
+	--secondary-color: #333333;
+	--tertiary-color: #4d4d4d;
+	--quaternary-color: #666666;
+
+	--text-color: #f2f2f2;
+	--text-color-secondary: #b3b3b3;
+
+	--border-color: #555555;
+
+	--background-color: #121212;
+	--background-color-secondary: #2b2727;
+	--primary: #bf2051;
+
+	--success-color: #00c853;
+	--warning-color: #ffbb33;
+	--error-color: #dd2c00;
+}
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
+	line-height: 1.5;
+	background: var(--background-color);
+	color: #f5f5f5;
+
+	padding: 0;
+	margin: 0;
+}
