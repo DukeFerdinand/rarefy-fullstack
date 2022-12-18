@@ -11,7 +11,7 @@ async function testBrower() {
 	});
 	const page = await browser.newPage();
 	await page.goto('https://example.com');
-	const pageTitle = await page.title();
+	// const pageTitle = await page.title();
 	await browser.close();
 }
 
