@@ -1,7 +1,9 @@
-import { chromium as playwright } from 'playwright';
+import playwright from 'playwright-aws-lambda';
 
 async function testBrower() {
-	const browser = await playwright.launch();
+	const browser = await playwright.launchChromium({
+		headless: true
+	});
 
 	const context = await browser.newContext();
 	const page = await context.newPage();
