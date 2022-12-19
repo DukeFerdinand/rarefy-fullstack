@@ -23,6 +23,7 @@ async function scrapeSearchTerm(page, searchTerm) {
  * @param {import('@vercel/node').VercelResponse} res
  */
 export default async function handler(req, res) {
+	const start = Date.now();
 	if (req.method === 'POST') {
 		try {
 			const { authorization } = req.headers;
@@ -55,4 +56,6 @@ export default async function handler(req, res) {
 		res.setHeader('Allow', 'POST');
 		res.status(405).end('Method Not Allowed');
 	}
+
+	console.log(`Total scrape time: ${Date.now() - start}ms`);
 }
