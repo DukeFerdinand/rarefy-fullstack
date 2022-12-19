@@ -35,15 +35,21 @@ export default async function handler(req, res) {
 				});
 				const page = await browser.newPage();
 
+				console.log(`Browser launched in ${Date.now() - start}ms`);
+
 				const body = req.body;
 				const titles = [];
 
 				for (const term of body.terms) {
 					const title = await scrapeSearchTerm(page, term.term);
 					titles.push(title);
+
+					console.log(`Scraped ${term.term} in ${Date.now() - start}ms`);
 				}
 
 				await browser.close();
+
+				console.log(`Browser closed in ${Date.now() - start}ms`);
 
 				res.status(200).json({ success: true, titles });
 			} else {
