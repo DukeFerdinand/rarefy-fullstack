@@ -7,12 +7,11 @@ const BUYEE_URL = 'https://buyee.jp/item/search/query/{{term}}/category/22260';
 
 /**
  *
- * @param {import('playwright-core').ChromiumBrowser} browser
+ * @param {import('playwright-core').Page} browser
  * @param {string} searchTerm
  * @returns
  */
-async function scrapeSearchTerm(browser, searchTerm) {
-	const page = await browser.newPage();
+async function scrapeSearchTerm(page, searchTerm) {
 	await page.goto(BUYEE_URL.replace('{{term}}', searchTerm));
 	const title = await page.title();
 	return title;
@@ -32,10 +31,13 @@ export default async function handler(req, res) {
 				const browser = await playwright.launchChromium({
 					headless: true
 				});
+				const page = await browser.newPage();
+
 				const body = req.body;
 				const titles = [];
+
 				for (const term of body.terms) {
-					const title = await scrapeSearchTerm(browser, term.term);
+					const title = await scrapeSearchTerm(page, term.term);
 					titles.push(title);
 				}
 
