@@ -29,7 +29,8 @@ export default async function handler(req, res) {
 
 			if (authorization === `Bearer ${process.env.API_SECRET_KEY}`) {
 				const browser = await playwright.launchChromium({
-					headless: true
+					headless: true,
+					timeout: 60 * 1000 // 60 seconds, limit of Vercel functions
 				});
 				const page = await browser.newPage();
 
