@@ -1,6 +1,6 @@
 import * as Kit from '@sveltejs/kit';
 
-interface LayoutParams {
+export interface LayoutParams {
 	user: Object;
 }
 

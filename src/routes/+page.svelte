@@ -1,7 +1,3 @@
-<script>
-	import './styles.css';
-</script>
-
 <section>
 	<h1>Welcome to Rarefy</h1>
 	<div>

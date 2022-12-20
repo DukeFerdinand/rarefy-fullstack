@@ -31,7 +31,7 @@
 	--success: #b2dbbf;
 	--primary: #7e5109;
 } */
-
+/* 
 :root {
 	--primary-color: #1e1e1e;
 	--secondary-color: #333333;
@@ -50,15 +50,13 @@
 	--success-color: #00c853;
 	--warning-color: #ffbb33;
 	--error-color: #dd2c00;
-}
+} */
 
-body {
+/* body {
 	font-family: 'Open Sans', sans-serif;
 	font-size: 16px;
 	line-height: 1.5;
-	/* background: var(--background-color); */
-	color: #f5f5f5;
 
 	padding: 0;
 	margin: 0;
-}
+} */
