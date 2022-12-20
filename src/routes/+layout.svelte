@@ -2,7 +2,7 @@
 	import Header from './Header.svelte';
 </script>
 
-<Header />
+<Header userSignedIn={false} />
 <main>
 	<slot />
 </main>
