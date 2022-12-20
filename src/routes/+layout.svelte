@@ -1,6 +1,7 @@
 <script lang="ts">
 	import '../app.postcss';
 	import type { LayoutParams } from './$types';
+	import Footer from './Footer.svelte';
 	import Header from './Header.svelte';
 
 	import './styles.css';
@@ -14,3 +15,4 @@
 <main>
 	<slot />
 </main>
+<Footer />

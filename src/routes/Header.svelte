@@ -1,12 +1,12 @@
 <script lang="ts">
 	import Spacer from '$lib/components/Spacer.svelte';
-	import { Button, DarkMode } from 'flowbite-svelte';
+	import { Button, DarkMode, Heading } from 'flowbite-svelte';
 
 	export let userSignedIn: boolean;
 </script>
 
 <header>
-	<h1>Rarefy</h1>
+	<Heading tag="h4">Rarefy</Heading>
 	<nav>
 		<DarkMode />
 		<Spacer direction="horizontal" spacing={15} />
@@ -34,10 +34,7 @@
 		justify-content: space-between;
 	}
 
-	header > h1 {
-		font-size: 1.5em;
-		font-family: 'Open Sans', sans-serif;
-
-		color: #fff;
+	header > nav > a {
+		flex-shrink: 0;
 	}
 </style>
