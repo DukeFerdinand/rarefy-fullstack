@@ -1,6 +1,6 @@
 <script lang="ts">
 	import {enhance} from '$app/forms'
-    import {Card, Heading, Input, Label, P, Button, Alert} from 'flowbite-svelte';
+    import {Card, Heading, Input, Label, P, Button, Alert, Mark} from 'flowbite-svelte';
 
     import Spacer from '$lib/components/Spacer.svelte';
     import type {ActionData} from './$types'
@@ -14,6 +14,8 @@
 			<Heading customSize="text-2xl font-extrabold  md:text-4xl lg:text-5xl">
 				Sign up with Rarefy
 			</Heading>
+			<Spacer spacing="15" />
+			<P size="2xl">Start tracking rares <Mark>today.</Mark></P>
 			<Spacer spacing="30" />
 			{#if form?.errorMessage}
 				<Alert color="red" style="margin-bottom: 1rem;">
@@ -25,6 +27,7 @@
 				<P size="lg">Username</P>
 				<Input required label="Username" type="text" name="username" id="username" />
 			</Label>
+			<Spacer direction="vertical" spacing={15} />
 			<Label>
 				<P size="lg">Email</P>
 				<Input required label="Email" type="email" name="email" id="email" />

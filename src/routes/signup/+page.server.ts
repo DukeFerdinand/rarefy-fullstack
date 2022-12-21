@@ -1,12 +1,12 @@
 import type { RequestEvent } from '@sveltejs/kit';
 import { redirect } from '@sveltejs/kit';
-import { PrismaClient } from '@prisma/client';
 
 import { dev } from '$app/environment'
 import { COOKIE_DOMAIN } from '$env/static/private'
 import { formDataToJSON } from '$lib/utils/formData';
 import { hashPassword } from '$lib/server/passwords';
 import {createJwt} from "$lib/server/jwt";
+import {dbConnection} from "$db/dbConnection";
 
 
 import type { ActionData } from './$types';
@@ -22,7 +22,7 @@ interface FormData {
 export const actions = {
 	default: async function({ locals, request, cookies }: RequestEvent): Promise<ActionData> {
 		try {
-			const prisma = new PrismaClient();
+			const prisma = dbConnection();
 			const data = await request.formData()
 			const { username, email, password, inviteCode } = formDataToJSON<FormData>(data);
 

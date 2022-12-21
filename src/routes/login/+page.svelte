@@ -1,8 +1,7 @@
 <script lang="ts">
 	import Spacer from '../../lib/components/Spacer.svelte';
-	import { Card, Heading, Input, Label, P, Button } from 'flowbite-svelte';
+    import {Card, Heading, Input, Label, P, Button, A} from 'flowbite-svelte';
 
-	export let userSignedIn: boolean;
 </script>
 
 <div>
@@ -11,6 +10,9 @@
 			<Heading customSize="text-2xl font-extrabold  md:text-4xl lg:text-5xl">
 				Login to Rarefy
 			</Heading>
+			<Spacer spacing="15" />
+			<P size="2xl">Welcome back, your rares miss you :(</P>
+			<Spacer spacing="30" />
 			<Label>
 				<P size="lg">Email</P>
 				<Input required label="Email" type="email" name="email" id="email" />
@@ -22,6 +24,8 @@
 			</Label>
 			<Spacer direction="vertical" spacing={15} />
 			<div style="display: flex; justify-content: flex-end;">
+				<A href="/signup">Need an account?</A>
+				<Spacer direction="horizontal" spacing="15" />
 				<Button size="lg" type="submit">Login</Button>
 			</div>
 		</form>
