@@ -1,46 +1,55 @@
 <script lang="ts">
-    import {Button, Card, Heading} from "flowbite-svelte";
+    import {Button, Card, Heading, P} from "flowbite-svelte";
     import Icon from 'svelte-icons-pack/Icon.svelte';
     import Plus from 'svelte-icons-pack/cg/CgMathPlus.js';
 
     import Spacer from "$lib/components/Spacer.svelte";
+    import type {DashboardSavedSearches, DashboardUser} from "$lib/types/frontend";
 
-    interface ISavedSearch {
-        id: string
-        name: string
-        query: string
-        createdAt: Date
-        updatedAt: Date
-        vinylOnly: boolean
-        userId: string
-    }
+    export let data: DashboardUser & {SavedSearch: DashboardSavedSearches[]};
 
-    export let data: {
-        savedSearches: ISavedSearch[]
-    }
+    export let user: DashboardUser;
+    $: user = data;
 
-    $: savedSearches = data.savedSearches;
+    export let savedSearches: DashboardSavedSearches[];
+    $: savedSearches = data.SavedSearch
 </script>
 
 <Spacer spacing="30" />
 <section>
 	<div class="main">
 		<div>
-			<Heading>Your saved searches</Heading>
+			<Heading>
+				Hey {user.username}
+			</Heading>
+			<Spacer spacing="15" />
+			<P size="xl">
+				Here's how your search game is going
+			</P>
+		</div>
+		<Spacer spacing="30" />
+		<div style="display: flex; justify-content: flex-end">
+<!--			<Input placeholder="Search">-->
+<!--				<Icon slot="left" icon={Plus} />-->
+<!--			</Input>-->
 			<Button><Icon src={Plus} /> <Spacer direction="horizontal" spacing="10" /> Add</Button>
 		</div>
 		<Spacer spacing="30" />
 
-		{#if !savedSearches.length}
-			<Card>
-				<p class="no-searches">You have no saved searches :(</p>
-			</Card>
 
+		{#if !savedSearches.length}
+			<P size="15">You have no saved searches :(</P>
 		{/if}
+
+<!--		<Card>-->
+<!--			<Heading tag="h4">Add a new search</Heading>-->
+<!--			<Spacer spacing="15" />-->
+<!--		</Card>-->
+
 	</div>
 	<aside>
 		<Card style="margin: 0 auto; height: 700px; width: 250px">
-			Add sidebard details here...
+			Add sidebar link here...
 		</Card>
 	</aside>
 </section>
@@ -53,6 +62,7 @@
 
 	.main {
 		min-height: 30vh;
+		padding: 0 30px;
 	}
 
 	aside {
