@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores'
 	import Spacer from '$lib/components/Spacer.svelte';
 	import { Button, DarkMode, Heading, A } from 'flowbite-svelte';
 
@@ -10,12 +11,17 @@
 	<nav>
 		<DarkMode />
 		<Spacer direction="horizontal" spacing={15} />
-
 		{#if userSignedIn}
-			<a href="/dashboard">Dashboard</a>
-			<a href="/logout">Log Out</a>
+			<A href="/logout">Log Out</A>
+			<Spacer direction="horizontal" spacing="25" />
 		{:else}
 			<Button style="width: 100px;" href="/login">Sign in</Button>
+		{/if}
+
+		<!-- There has to be a better way to do this... -->
+		{#if userSignedIn && !$page.url.toString().endsWith('/app') }
+
+			<Button href="/app">Dashboard</Button>
 		{/if}
 	</nav>
 </header>
@@ -32,9 +38,5 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-	}
-
-	header > nav > a {
-		flex-shrink: 0;
 	}
 </style>
