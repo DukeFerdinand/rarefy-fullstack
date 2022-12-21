@@ -4,7 +4,7 @@ import { redirect } from '@sveltejs/kit';
 import { formDataToJSON } from '$lib/utils/formData';
 import { comparePassword } from '$lib/server/passwords';
 import { createJwt } from "$lib/server/jwt";
-import {CookieOptions} from "$lib/server/cookies";
+import { getCookieOptions } from "$lib/server/cookies";
 import {dbConnection} from "$db/dbConnection";
 
 interface FormData {
@@ -55,8 +55,9 @@ export const actions = {
 			}
 
 			const jwt = createJwt(locals.user)
+			const cookieOptions = getCookieOptions(new URL(request.url).host)
 
-			cookies.set('rarefy_token', jwt, CookieOptions)
+			cookies.set('rarefy_token', jwt, cookieOptions)
 
 		} catch (e) {
 			console.error(e)

@@ -30,6 +30,5 @@ export const load: LoadFunc = async function ({ locals , cookies}) {
         joined: data.joined,
     }
 
-    console.log(data)
     return data
 }

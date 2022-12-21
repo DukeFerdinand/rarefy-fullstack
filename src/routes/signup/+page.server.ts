@@ -3,7 +3,7 @@ import { redirect } from '@sveltejs/kit';
 
 import { formDataToJSON } from '$lib/utils/formData';
 import { hashPassword } from '$lib/server/passwords';
-import {CookieOptions} from "$lib/server/cookies";
+import { getCookieOptions } from "$lib/server/cookies";
 import {createJwt} from "$lib/server/jwt";
 import {dbConnection} from "$db/dbConnection";
 
@@ -52,8 +52,9 @@ export const actions = {
 			})
 
 			const jwt = createJwt(locals.user)
+			const cookieOptions = getCookieOptions(new URL(request.url).host)
 
-			cookies.set('rarefy_token', jwt, CookieOptions)
+			cookies.set('rarefy_token', jwt, cookieOptions)
 
 
 			// Only set the invite code state to "used" if the user was created successfully
