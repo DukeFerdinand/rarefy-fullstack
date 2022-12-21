@@ -1,7 +1,8 @@
 <script lang="ts">
 	import Spacer from '../../lib/components/Spacer.svelte';
-    import {Card, Heading, Input, Label, P, Button, A} from 'flowbite-svelte';
+    import {Card, Heading, Input, Label, P, Button, A, Alert} from 'flowbite-svelte';
 
+    export let form: {errorMessage: string};
 </script>
 
 <div>
@@ -11,6 +12,12 @@
 				Login to Rarefy
 			</Heading>
 			<Spacer spacing="15" />
+			{#if form?.errorMessage}
+				<Alert color="red" style="margin-bottom: 1rem;">
+					{form.errorMessage} :(
+				</Alert>
+				<Spacer spacing="15" />
+			{/if}
 			<P size="2xl">Welcome back, your rares miss you :(</P>
 			<Spacer spacing="30" />
 			<Label>
