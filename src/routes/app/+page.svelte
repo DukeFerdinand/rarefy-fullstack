@@ -5,7 +5,21 @@
 
     import Spacer from "$lib/components/Spacer.svelte";
 
-    export let searches: Array<any>;
+    interface ISavedSearch {
+        id: string
+        name: string
+        query: string
+        createdAt: Date
+        updatedAt: Date
+        vinylOnly: boolean
+        userId: string
+    }
+
+    export let data: {
+        savedSearches: ISavedSearch[]
+    }
+
+    $: savedSearches = data.savedSearches;
 </script>
 
 <Spacer spacing="30" />
@@ -17,7 +31,7 @@
 		</div>
 		<Spacer spacing="30" />
 
-		{#if !searches}
+		{#if !savedSearches.length}
 			<Card>
 				<p class="no-searches">You have no saved searches :(</p>
 			</Card>
