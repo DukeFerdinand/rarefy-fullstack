@@ -1,48 +1,52 @@
-<script>
-	let name = '';
-	let email = '';
-	let password = '';
-	let confirmPassword = '';
-	let inviteCode = ''; // add invite code variable
-	let errorMessage = '';
+<script lang="ts">
+	import {enhance} from '$app/forms'
+    import {Card, Heading, Input, Label, P, Button, Alert} from 'flowbite-svelte';
 
-	function validateForm() {
-		if (name.trim() === '') {
-			errorMessage = 'Please enter a name';
-			return;
-		}
-		if (email.trim() === '') {
-			errorMessage = 'Please enter an email';
-			return;
-		}
-		if (password.trim() === '') {
-			errorMessage = 'Please enter a password';
-			return;
-		}
-		if (confirmPassword.trim() === '') {
-			errorMessage = 'Please confirm your password';
-			return;
-		}
-		if (password !== confirmPassword) {
-			errorMessage = 'Passwords do not match';
-			return;
-		}
+    import Spacer from '$lib/components/Spacer.svelte';
+    import type {ActionData} from './$types'
 
-		// validate invite code if necessary
-		// ...
-
-		// if form is valid, send request to server to create new account
-		// ...
-	}
-
-	import Spacer from '$lib/components/Spacer.svelte';
+    export let form: ActionData;
 </script>
 
-<form on:submit|preventDefault={validateForm}>
-	<!-- <Card padded variant="raised">
-		<Textfield label="Name" variant="outlined" size={25} value={name} />
-		<Spacer spacing={15} />
-		<Textfield label="Email" variant="outlined" size={25} value={name} />
-		<Spacer spacing={15} />
-	</Card> -->
-</form>
+<div>
+	<Card size={'lg'} style="margin: 0 auto;" padding="xl">
+		<form method="POST" use:enhance>
+			<Heading customSize="text-2xl font-extrabold  md:text-4xl lg:text-5xl">
+				Sign up with Rarefy
+			</Heading>
+			<Spacer spacing="30" />
+			{#if form?.errorMessage}
+				<Alert color="red" style="margin-bottom: 1rem;">
+					{form.errorMessage} :(
+				</Alert>
+				<Spacer spacing="15" />
+			{/if}
+			<Label>
+				<P size="lg">Username</P>
+				<Input required label="Username" type="text" name="username" id="username" />
+			</Label>
+			<Label>
+				<P size="lg">Email</P>
+				<Input required label="Email" type="email" name="email" id="email" />
+			</Label>
+			<Spacer direction="vertical" spacing={15} />
+			<Label>
+				<P size="lg">Password</P>
+				<Input required label="Password" type="password" name="password" id="password" />
+			</Label>
+			<Spacer direction="vertical" spacing={15} />
+			<Label>
+				<P size="lg">Invite Code</P>
+				<Input required label="Invite Code" type="text" name="inviteCode" id="inviteCode" />
+			</Label>
+
+			<Spacer direction="vertical" spacing={15} />
+			<div style="display: flex; justify-content: flex-end;">
+				<Button size="lg" type="submit">Login</Button>
+			</div>
+		</form>
+	</Card>
+	<Spacer direction="vertical" spacing={150} />
+</div>
+
+

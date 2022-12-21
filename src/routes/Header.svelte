@@ -1,12 +1,12 @@
 <script lang="ts">
 	import Spacer from '$lib/components/Spacer.svelte';
-	import { Button, DarkMode, Heading } from 'flowbite-svelte';
+	import { Button, DarkMode, Heading, A } from 'flowbite-svelte';
 
 	export let userSignedIn: boolean;
 </script>
 
 <header>
-	<Heading tag="h4">Rarefy</Heading>
+	<A href="/"><Heading tag="h4">Rarefy</Heading></A>
 	<nav>
 		<DarkMode />
 		<Spacer direction="horizontal" spacing={15} />
@@ -15,7 +15,7 @@
 			<a href="/dashboard">Dashboard</a>
 			<a href="/logout">Log Out</a>
 		{:else}
-			<Button href="/">Sign in / Sign up</Button>
+			<Button style="width: 100px;" href="/login">Sign in</Button>
 		{/if}
 	</nav>
 </header>

@@ -10,13 +10,16 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"test:unit": "vitest",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
-		"format": "prettier --plugin-search-dir . --write ."
+		"format": "prettier --plugin-search-dir . --write .",
+		"dbscript": "node ./scripts/db.js"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.29.0",
 		"@popperjs/core": "^2.11.6",
 		"@sveltejs/adapter-auto": "^1.0.0",
 		"@sveltejs/kit": "^1.0.0",
+		"@types/bcrypt": "^5.0.0",
+		"@types/jsonwebtoken": "^8.5.9",
 		"@types/node": "^18.11.17",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
 		"@typescript-eslint/parser": "^5.45.0",
@@ -32,10 +35,12 @@
 		"postcss-load-config": "^4.0.1",
 		"prettier": "^2.8.0",
 		"prettier-plugin-svelte": "^2.8.1",
+		"prisma": "^4.8.0",
 		"svelte": "^3.54.0",
 		"svelte-check": "^2.9.2",
 		"svelte-preprocess": "^4.10.7",
 		"tailwindcss": "^3.1.5",
+		"ts-node": "^10.9.1",
 		"tslib": "^2.4.1",
 		"typescript": "^4.9.3",
 		"vite": "^4.0.0",
@@ -43,6 +48,9 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@prisma/client": "^4.8.0",
+		"bcrypt": "^5.1.0",
+		"jsonwebtoken": "^8.5.1",
 		"playwright-aws-lambda": "^0.9.0",
 		"playwright-core": "^1.29.0"
 	}
