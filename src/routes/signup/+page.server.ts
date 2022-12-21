@@ -1,10 +1,9 @@
 import type { RequestEvent } from '@sveltejs/kit';
 import { redirect } from '@sveltejs/kit';
 
-import { dev } from '$app/environment'
-import { COOKIE_DOMAIN } from '$env/static/private'
 import { formDataToJSON } from '$lib/utils/formData';
 import { hashPassword } from '$lib/server/passwords';
+import {CookieOptions} from "$lib/server/cookies";
 import {createJwt} from "$lib/server/jwt";
 import {dbConnection} from "$db/dbConnection";
 
@@ -54,14 +53,7 @@ export const actions = {
 
 			const jwt = createJwt(locals.user)
 
-			cookies.set('rarefy_token', jwt, {
-				domain: process.env.VERCEL_URL || COOKIE_DOMAIN,
-				path: '/',
-				maxAge: 60 * 60 * 24 * 30, // 30 days
-				sameSite: 'strict',
-				secure: !dev,
-				httpOnly: true
-			})
+			cookies.set('rarefy_token', jwt, CookieOptions)
 
 
 			// Only set the invite code state to "used" if the user was created successfully

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {Button, Card, Heading, P} from "flowbite-svelte";
+    import {Button, Card, Heading, Mark, P, Search} from "flowbite-svelte";
     import Icon from 'svelte-icons-pack/Icon.svelte';
     import Plus from 'svelte-icons-pack/cg/CgMathPlus.js';
 
@@ -24,27 +24,28 @@
 			</Heading>
 			<Spacer spacing="15" />
 			<P size="xl">
-				Here's how your search game is going
+				How strong is your <Mark>rare</Mark> game?
 			</P>
 		</div>
 		<Spacer spacing="30" />
-		<div style="display: flex; justify-content: flex-end">
-<!--			<Input placeholder="Search">-->
-<!--				<Icon slot="left" icon={Plus} />-->
-<!--			</Input>-->
-			<Button><Icon src={Plus} /> <Spacer direction="horizontal" spacing="10" /> Add</Button>
+		<div class="flex gap-2">
+			<Search size="md">
+				<Button size="sm">
+					Search
+				</Button>
+			</Search>
+			<Button><Icon src={Plus} /> <Spacer direction="horizontal" spacing="10" /> New</Button>
 		</div>
 		<Spacer spacing="30" />
 
 
-		{#if !savedSearches.length}
-			<P size="15">You have no saved searches :(</P>
-		{/if}
-
-<!--		<Card>-->
-<!--			<Heading tag="h4">Add a new search</Heading>-->
-<!--			<Spacer spacing="15" />-->
-<!--		</Card>-->
+		<div class="saved-searches">
+			{#if !savedSearches.length}
+				<P align="center" size="15">You have no saved searches! :(</P>
+			{:else}
+				<Card>add items here..</Card>
+			{/if}
+		</div>
 
 	</div>
 	<aside>
@@ -63,6 +64,17 @@
 	.main {
 		min-height: 30vh;
 		padding: 0 30px;
+	}
+
+	.control-bar {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.control-bar > button {
+		flex: 1;
+		flex-shrink: 0;
 	}
 
 	aside {
