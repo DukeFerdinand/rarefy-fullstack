@@ -1,4 +1,4 @@
-import {User} from '@prisma/client';
+import { User } from '@prisma/client';
 
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
@@ -12,5 +12,4 @@ declare global {
 		// interface PageData {}
 		// interface Platform {}
 	}
-
 }

@@ -1,4 +1,3 @@
 import { ServerLoad } from '@sveltejs/kit';
 
-export type LoadFunc = ServerLoad
-
+export type LoadFunc = ServerLoad;

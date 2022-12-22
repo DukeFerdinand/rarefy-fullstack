@@ -1,6 +1,5 @@
-
 export interface FormError {
-    errorMessage: string;
+	errorMessage: string;
 }
 
-export type ActionData = FormError | undefined
+export type ActionData = FormError | undefined;

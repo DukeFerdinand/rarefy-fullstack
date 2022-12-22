@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores'
+	import { page } from '$app/stores';
 	import Spacer from '$lib/components/Spacer.svelte';
 	import { Button, DarkMode, Heading, A } from 'flowbite-svelte';
 
@@ -19,8 +19,7 @@
 		{/if}
 
 		<!-- There has to be a better way to do this... -->
-		{#if userSignedIn && !$page.url.toString().endsWith('/app') }
-
+		{#if userSignedIn && !$page.url.toString().endsWith('/app')}
 			<Button href="/app">Dashboard</Button>
 		{/if}
 	</nav>

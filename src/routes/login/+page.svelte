@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Spacer from '../../lib/components/Spacer.svelte';
-    import {Card, Heading, Input, Label, P, Button, A, Alert} from 'flowbite-svelte';
+	import { Card, Heading, Input, Label, P, Button, A, Alert } from 'flowbite-svelte';
 
-    export let form: {errorMessage: string};
+	export let form: { errorMessage: string };
 </script>
 
 <div>
@@ -39,5 +39,3 @@
 	</Card>
 	<Spacer direction="vertical" spacing={150} />
 </div>
-
-

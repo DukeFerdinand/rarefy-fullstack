@@ -1,4 +1,4 @@
-import type {User, SavedSearch} from "@prisma/client";
+import type { User, SavedSearch } from '@prisma/client';
 
-export type DashboardSavedSearches = SavedSearch[]
-export type DashboardUser = User
+export type DashboardSavedSearches = SavedSearch[];
+export type DashboardUser = User;

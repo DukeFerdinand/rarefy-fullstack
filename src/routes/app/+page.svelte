@@ -1,18 +1,18 @@
 <script lang="ts">
-    import {Button, Card, Heading, Mark, P, Search} from "flowbite-svelte";
-    import Icon from 'svelte-icons-pack/Icon.svelte';
-    import Plus from 'svelte-icons-pack/cg/CgMathPlus.js';
+	import { Button, Card, Heading, Mark, P, Search } from 'flowbite-svelte';
+	import Icon from 'svelte-icons-pack/Icon.svelte';
+	import Plus from 'svelte-icons-pack/cg/CgMathPlus.js';
 
-    import Spacer from "$lib/components/Spacer.svelte";
-    import type {DashboardSavedSearches, DashboardUser} from "$lib/types/frontend";
+	import Spacer from '$lib/components/Spacer.svelte';
+	import type { DashboardSavedSearches, DashboardUser } from '$lib/types/frontend';
 
-    export let data: DashboardUser & {SavedSearch: DashboardSavedSearches[]};
+	export let data: DashboardUser & { SavedSearch: DashboardSavedSearches[] };
 
-    export let user: DashboardUser;
-    $: user = data;
+	export let user: DashboardUser;
+	$: user = data;
 
-    export let savedSearches: DashboardSavedSearches[];
-    $: savedSearches = data.SavedSearch
+	export let savedSearches: DashboardSavedSearches[];
+	$: savedSearches = data.SavedSearch;
 </script>
 
 <Spacer spacing="30" />
@@ -30,14 +30,11 @@
 		<Spacer spacing="30" />
 		<div class="flex gap-2">
 			<Search size="md">
-				<Button size="sm">
-					Search
-				</Button>
+				<Button size="sm">Search</Button>
 			</Search>
 			<Button><Icon src={Plus} /> <Spacer direction="horizontal" spacing="10" /> New</Button>
 		</div>
 		<Spacer spacing="30" />
-
 
 		<div class="saved-searches">
 			{#if !savedSearches.length}
@@ -46,12 +43,9 @@
 				<Card>add items here..</Card>
 			{/if}
 		</div>
-
 	</div>
 	<aside>
-		<Card style="margin: 0 auto; height: 700px; width: 250px">
-			Add sidebar link here...
-		</Card>
+		<Card style="margin: 0 auto; height: 700px; width: 250px">Add sidebar link here...</Card>
 	</aside>
 </section>
 

@@ -12,7 +12,9 @@
 
 	<Spacer direction="vertical" spacing={30} />
 
-	<P size="2xl" align="center">The easiest way to track down and buy rare media from across the world.</P>
+	<P size="2xl" align="center"
+		>The easiest way to track down and buy rare media from across the world.</P
+	>
 	<P size="2xl" align="center">You want it? <Mark>You got it</Mark></P>
 </section>
 

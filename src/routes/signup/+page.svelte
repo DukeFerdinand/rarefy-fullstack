@@ -1,11 +1,11 @@
 <script lang="ts">
-	import {enhance} from '$app/forms'
-    import {Card, Heading, Input, Label, P, Button, Alert, Mark} from 'flowbite-svelte';
+	import { enhance } from '$app/forms';
+	import { Card, Heading, Input, Label, P, Button, Alert, Mark } from 'flowbite-svelte';
 
-    import Spacer from '$lib/components/Spacer.svelte';
-    import type {ActionData} from './$types'
+	import Spacer from '$lib/components/Spacer.svelte';
+	import type { ActionData } from './$types';
 
-    export let form: ActionData;
+	export let form: ActionData;
 </script>
 
 <div>
@@ -51,5 +51,3 @@
 	</Card>
 	<Spacer direction="vertical" spacing={150} />
 </div>
-
-
