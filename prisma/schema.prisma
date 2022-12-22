@@ -58,7 +58,6 @@ model MachineUser {
   commonName String
   created    DateTime @default(now())
   allowedIps String[]
-  token      String   @unique @default(cuid())
 
   AccessTokens AccessToken[]
   permissions  MachineUserPermission[]
