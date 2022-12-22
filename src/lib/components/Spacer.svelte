@@ -1,6 +1,6 @@
 <script lang="ts">
-	export let spacing: number;
-	export let direction: 'horizontal' | 'vertical' | undefined;
+	export let spacing: number | string;
+	export let direction: 'horizontal' | 'vertical' | undefined = 'vertical';
 </script>
 
 <div

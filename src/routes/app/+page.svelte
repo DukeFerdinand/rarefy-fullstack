@@ -38,7 +38,7 @@
 
 		<div class="saved-searches">
 			{#if !savedSearches.length}
-				<P align="center" size="15">You have no saved searches! :(</P>
+				<P align="center" size="xl">You have no saved searches! :(</P>
 			{:else}
 				<Card>add items here..</Card>
 			{/if}
