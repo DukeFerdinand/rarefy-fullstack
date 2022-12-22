@@ -51,3 +51,39 @@ model SearchResult {
   search   SavedSearch @relation(fields: [searchId], references: [id])
   searchId String
 }
+
+// ACCESS TOKENS
+model MachineUser {
+  id         String   @id @default(uuid())
+  commonName String
+  created    DateTime @default(now())
+  allowedIps String[]
+  token      String   @unique @default(cuid())
+
+  AccessTokens AccessToken[]
+  permissions  MachineUserPermission[]
+}
+
+model AccessToken {
+  id        String    @id @default(uuid())
+  token     String    @unique @default(cuid())
+  created   DateTime  @default(now())
+  expires   DateTime?
+  revoked   Boolean   @default(false)
+  revokedAt DateTime?
+
+  machineUser   MachineUser @relation(fields: [machineUserId], references: [id])
+  machineUserId String
+}
+
+model MachineUserPermission {
+  id         String     @id @default(uuid())
+  permission Permission
+
+  machineUser MachineUser[]
+}
+
+enum Permission {
+  READ
+  WRITE
+}
