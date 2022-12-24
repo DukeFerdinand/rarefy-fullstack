@@ -1,7 +1,7 @@
 <script>
 	import Icon from 'svelte-icons-pack/Icon.svelte';
     import CgArrowLeft from 'svelte-icons-pack/cg/CgArrowLeft.js';
-    import {Button, P} from "flowbite-svelte";
+    import {Button} from "flowbite-svelte";
 
     import { page } from '$app/stores';
 	import Spacer from "$lib/components/Spacer.svelte";
@@ -18,7 +18,7 @@
 			<Button href="/app">
 				<Icon src={CgArrowLeft} />
 				<Spacer direction="horizontal" spacing="15" />
-				<P>Back to list</P>
+				Back to list
 			</Button>
 			<br/>
 		{/if}
