@@ -51,7 +51,6 @@
 <Spacer spacing="30" />
 <div class="flex gap-2">
 	<Search size="md">
-		<Button size="sm">Search</Button>
 	</Search>
 	<Button on:click={() => newSearchModalOpen = true}><Icon src={Plus} /> <Spacer direction="horizontal" spacing="10" /> New</Button>
 	<Modal title="Add a new query" bind:open={newSearchModalOpen} >

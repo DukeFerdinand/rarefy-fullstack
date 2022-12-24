@@ -1,6 +1,10 @@
 <script>
-    import {Card} from "flowbite-svelte";
-    import Spacer from "../../lib/components/Spacer.svelte";
+	import Icon from 'svelte-icons-pack/Icon.svelte';
+    import CgArrowLeft from 'svelte-icons-pack/cg/CgArrowLeft.js';
+    import {Button, P} from "flowbite-svelte";
+
+    import { page } from '$app/stores';
+	import Spacer from "$lib/components/Spacer.svelte";
 </script>
 
 <Spacer spacing="30" />
@@ -10,7 +14,15 @@
 		<slot />
 	</div>
 	<aside>
-		<Card style="margin: 0 auto; height: 700px; width: 250px">Add sidebar link here...</Card>
+		{#if !$page.url.toString().endsWith('/app')}
+			<Button href="/app">
+				<Icon src={CgArrowLeft} />
+				<Spacer direction="horizontal" spacing="15" />
+				<P>Back to list</P>
+			</Button>
+			<br/>
+		{/if}
+		other links here
 	</aside>
 </section>
 
@@ -24,6 +36,13 @@
 
 	aside {
 		order: -1;
+
+        margin: 0 auto; height: 700px; width: 250px
+	}
+
+	aside > a {
+		margin-left: auto;
+		display: block;
 	}
 
 
