@@ -40,13 +40,14 @@ model SavedSearch {
 }
 
 model SearchResult {
-  id        String   @id @default(uuid())
-  image     String
+  id        String    @id @default(uuid())
+  image     String[] // Probably S3 ids
   url       String
   price     String
+  startDate DateTime?
   endDate   DateTime
-  foundAt   DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  foundAt   DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 
   search   SavedSearch @relation(fields: [searchId], references: [id])
   searchId String
@@ -54,11 +55,11 @@ model SearchResult {
 
 // ACCESS TOKENS
 model MachineUser {
-  id         String   @id @default(uuid())
-  commonName String
-  created    DateTime @default(now())
-  allowedIps String[]
-
+  id           String                  @id @default(uuid())
+  commonName   String
+  created      DateTime                @default(now())
+  allowedIps   String[]
+  token        String                  @unique
   AccessTokens AccessToken[]
   permissions  MachineUserPermission[]
 }
