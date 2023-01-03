@@ -1,0 +1,17 @@
+# Send a curl request every 3 hours via GitHub Actions
+
+name: Cron job
+on:
+  schedule:
+    - cron: '0 */3 * * *'
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+          - run: |
+              curl -X "POST" "https://www.rarefy.me/api/cron" \
+                      -H 'Authorization: Bearer ${{ secrets.CRON_API_SECRET }}' \
+                      -H 'Content-Type: application/json; charset=utf-8' \
+                    -d $'{
+                  "jobType": "GetAllSearchResults"
+              }'

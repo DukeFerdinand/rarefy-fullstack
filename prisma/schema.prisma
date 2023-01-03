@@ -46,14 +46,24 @@ model SavedSearch {
 }
 
 model SearchResult {
-  id        String    @id @default(uuid())
-  image     String[] // Probably S3 ids
-  url       String
-  price     String
-  startDate DateTime?
+  id String @id @default(uuid())
+
+  // Metadata
+  title String
+  image String[] // Ideally S3 IDs
+  url   String   @unique
+
+  // Price and bids
+  startingPrice String
+  currentPrice  String
+  endPrice      String?
+  bids          Int
+
+  // Important times
+  startDate DateTime
   endDate   DateTime
-  foundAt   DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  foundAt   DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   search   SavedSearch @relation(fields: [searchId], references: [id])
   searchId String
@@ -65,18 +75,18 @@ model MachineUser {
   commonName   String
   created      DateTime                @default(now())
   allowedIps   String[]
-  token        String                  @unique
   AccessTokens AccessToken[]
   permissions  MachineUserPermission[]
 }
 
 model AccessToken {
-  id        String    @id @default(uuid())
-  token     String    @unique @default(cuid())
-  created   DateTime  @default(now())
-  expires   DateTime?
-  revoked   Boolean   @default(false)
-  revokedAt DateTime?
+  id          String       @id @default(uuid())
+  token       String       @unique @default(cuid())
+  created     DateTime     @default(now())
+  expires     DateTime?
+  revoked     Boolean      @default(false)
+  revokedAt   DateTime?
+  permissions Permission[] @default([READ, WRITE])
 
   machineUser   MachineUser @relation(fields: [machineUserId], references: [id])
   machineUserId String

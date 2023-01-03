@@ -1,9 +1,10 @@
 import type { Handle } from '@sveltejs/kit';
-import { redirect } from '@sveltejs/kit';
+import { redirect, error } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 
-import { publicRoutes, routeStartsWithAnyOf } from '$lib/routes';
+import {machineRoutes, publicRoutes, routeStartsWithAnyOf} from '$lib/routes';
 import { verifyJwt } from '$lib/server/jwt';
+import {checkMachineUserToken} from "$lib/server/machineUser";
 
 const logger: Handle = async ({ event, resolve }) => {
 	const start = Date.now();
@@ -15,6 +16,23 @@ const logger: Handle = async ({ event, resolve }) => {
 
 	return result;
 };
+
+const serverAuth: Handle = async ({event, resolve}) => {
+	// ignore if this is not an affected route
+	if (!routeStartsWithAnyOf(event.url.pathname, machineRoutes)) {
+		return resolve(event)
+	}
+
+	// add auth check here
+	const authToken = event.request.headers.get('Authorization')
+	const machineUser = await checkMachineUserToken(authToken || '')
+
+	if (!machineUser) {
+		throw error(403, "Unauthorized")
+	}
+
+	return resolve(event)
+}
 
 const auth: Handle = async ({ event, resolve }) => {
 	const authToken = event.cookies.get('rarefy_token');
@@ -41,4 +59,4 @@ const auth: Handle = async ({ event, resolve }) => {
 	}
 };
 
-export const handle = sequence(logger, auth);
+export const handle = sequence(logger, serverAuth, auth);

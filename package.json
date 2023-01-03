@@ -52,6 +52,7 @@
 	"dependencies": {
 		"@prisma/client": "^4.8.0",
 		"bcrypt": "^5.1.0",
+		"bee-queue": "^1.5.0",
 		"jsonwebtoken": "^8.5.1",
 		"playwright-aws-lambda": "^0.9.0",
 		"playwright-core": "^1.29.0",
