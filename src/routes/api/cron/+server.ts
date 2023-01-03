@@ -24,7 +24,7 @@ export const POST: RequestHandler = async function ({ request }) {
 					savedSearches.map((search) => {
 						return {
 							opts: {
-								attempts: 3
+								attempts: 1
 							},
 							data: {
 								jobType: 'crawler',

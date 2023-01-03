@@ -49,15 +49,16 @@ model SearchResult {
   id String @id @default(uuid())
 
   // Metadata
-  title String
-  image String[] // Ideally S3 IDs
-  url   String   @unique
+  title  String
+  images String[] // Ideally S3 IDs
+  url    String   @unique
+  notified Boolean @default(false)
 
   // Price and bids
   startingPrice String
   currentPrice  String
   endPrice      String?
-  bids          Int
+  bids          Int @default(0)
 
   // Important times
   startDate DateTime
