@@ -2,9 +2,9 @@ import type { Handle } from '@sveltejs/kit';
 import { redirect, error } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 
-import {machineRoutes, publicRoutes, routeStartsWithAnyOf} from '$lib/routes';
+import { machineRoutes, publicRoutes, routeStartsWithAnyOf } from '$lib/routes';
 import { verifyJwt } from '$lib/server/jwt';
-import {checkMachineUserToken} from "$lib/server/machineUser";
+import { checkMachineUserToken } from '$lib/server/machineUser';
 
 const logger: Handle = async ({ event, resolve }) => {
 	const start = Date.now();
@@ -17,22 +17,22 @@ const logger: Handle = async ({ event, resolve }) => {
 	return result;
 };
 
-const serverAuth: Handle = async ({event, resolve}) => {
+const serverAuth: Handle = async ({ event, resolve }) => {
 	// ignore if this is not an affected route
 	if (!routeStartsWithAnyOf(event.url.pathname, machineRoutes)) {
-		return resolve(event)
+		return resolve(event);
 	}
 
 	// add auth check here
-	const authToken = event.request.headers.get('Authorization')
-	const machineUser = await checkMachineUserToken(authToken || '')
+	const authToken = event.request.headers.get('Authorization');
+	const machineUser = await checkMachineUserToken(authToken || '');
 
 	if (!machineUser) {
-		throw error(403, "Unauthorized")
+		throw error(403, 'Unauthorized');
 	}
 
-	return resolve(event)
-}
+	return resolve(event);
+};
 
 const auth: Handle = async ({ event, resolve }) => {
 	const authToken = event.cookies.get('rarefy_token');

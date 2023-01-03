@@ -1,13 +1,13 @@
-import {dbConnection} from "$db/dbConnection";
+import { dbConnection } from '$db/dbConnection';
 
 export async function checkMachineUserToken(token: string) {
-	const prisma = dbConnection()
+	const prisma = dbConnection();
 	return prisma.accessToken.findUnique({
 		where: {
-			token: token.replace("Bearer ", '')
+			token: token.replace('Bearer ', '')
 		},
 		include: {
 			machineUser: true
 		}
-	})
+	});
 }

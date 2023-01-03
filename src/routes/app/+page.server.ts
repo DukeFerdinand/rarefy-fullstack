@@ -1,9 +1,9 @@
 import { dbConnection } from '$db/dbConnection';
 import type { LoadFunc } from './$types';
 import { verifyJwt } from '../../lib/server/jwt';
-import {redirect} from '@sveltejs/kit';
-import type {RequestEvent} from '@sveltejs/kit';
-import {formDataToJSON} from "../../lib/utils/formData";
+import { redirect } from '@sveltejs/kit';
+import type { RequestEvent } from '@sveltejs/kit';
+import { formDataToJSON } from '../../lib/utils/formData';
 
 // Load
 
@@ -46,22 +46,22 @@ interface FormData {
 }
 
 export const actions = {
-	newQuery: async({request, locals}: RequestEvent) => {
-		const data = await request.formData()
-		const jsonFormData = formDataToJSON<FormData>(data)
+	newQuery: async ({ request, locals }: RequestEvent) => {
+		const data = await request.formData();
+		const jsonFormData = formDataToJSON<FormData>(data);
 
-		const prisma = dbConnection()
+		const prisma = dbConnection();
 		await prisma.savedSearch.create({
 			data: {
 				name: '',
 				userId: locals.user.id,
 				query: jsonFormData.query,
-				vinylOnly: Boolean(jsonFormData.vinylOnly),
+				vinylOnly: Boolean(jsonFormData.vinylOnly)
 			}
-		})
+		});
 
 		return {
 			message: `Query ${jsonFormData.query} saved!`
-		}
+		};
 	}
-}
+};

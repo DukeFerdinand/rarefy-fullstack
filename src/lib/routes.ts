@@ -1,4 +1,4 @@
-export const machineRoutes = ['/api']
+export const machineRoutes = ['/api'];
 
 export const publicRoutes = ['/login', '/signup', '/forgot-password', '/'];
 

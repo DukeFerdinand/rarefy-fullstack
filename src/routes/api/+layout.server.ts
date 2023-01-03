@@ -1,9 +1,9 @@
-import type {LayoutServerLoad} from "./$types";
+import type { LayoutServerLoad } from './$types';
 
-console.log("api server layout!")
+console.log('api server layout!');
 
-export const load:LayoutServerLoad = async ({request}) => {
-	const authHeader = request.headers.get("Authorization")
+export const load: LayoutServerLoad = async ({ request }) => {
+	const authHeader = request.headers.get('Authorization');
 
-	console.log('auth', authHeader)
-}
+	console.log('auth', authHeader);
+};

@@ -1,32 +1,32 @@
 <script lang="ts">
-    import {
-        Alert,
-        Button,
-        Card,
-        Heading,
-        Hr,
-        Input,
-        Label,
-        Mark,
-        Modal,
-        P,
-        Search,
-        Spinner,
-        Toggle
-    } from 'flowbite-svelte';
+	import {
+		Alert,
+		Button,
+		Card,
+		Heading,
+		Hr,
+		Input,
+		Label,
+		Mark,
+		Modal,
+		P,
+		Search,
+		Spinner,
+		Toggle
+	} from 'flowbite-svelte';
 	import Icon from 'svelte-icons-pack/Icon.svelte';
 	import Plus from 'svelte-icons-pack/cg/CgMathPlus.js';
 
-    import { enhance } from '$app/forms';
+	import { enhance } from '$app/forms';
 
-    import Spacer from '$lib/components/Spacer.svelte';
+	import Spacer from '$lib/components/Spacer.svelte';
 	import type { DashboardSavedSearches, DashboardUser } from '$lib/types/frontend';
 
-    // State
+	// State
 	let loading = false;
 	let newSearchModalOpen = false;
 
-    // Data from server
+	// Data from server
 	export let data: DashboardUser & { SavedSearch: DashboardSavedSearches[] };
 	export let user: DashboardUser;
 	$: user = data;
@@ -35,7 +35,7 @@
 	$: savedSearches = data.SavedSearch;
 
 	export let form: {
-        message?: string;
+		message?: string;
 	};
 </script>
 
@@ -50,10 +50,11 @@
 </div>
 <Spacer spacing="30" />
 <div class="flex gap-2">
-	<Search size="md">
-	</Search>
-	<Button on:click={() => newSearchModalOpen = true}><Icon src={Plus} /> <Spacer direction="horizontal" spacing="10" /> New</Button>
-	<Modal title="Add a new query" bind:open={newSearchModalOpen} >
+	<Search size="md" />
+	<Button on:click={() => (newSearchModalOpen = true)}
+		><Icon src={Plus} /> <Spacer direction="horizontal" spacing="10" /> New</Button
+	>
+	<Modal title="Add a new query" bind:open={newSearchModalOpen}>
 		<form id="new-query" method="post" action="/app?/newQuery" use:enhance>
 			<Label>
 				<P>Search terms</P>
@@ -63,12 +64,12 @@
 
 				<Spacer spacing="15" />
 				<P>
-					This interface is a WIP, please bear with me as more options will be added for things like Platform,
-					exclude terms, etc. :)
+					This interface is a WIP, please bear with me as more options will be added for things like
+					Platform, exclude terms, etc. :)
 				</P>
 			</Label>
 		</form>
-		<svelte:fragment slot='footer'>
+		<svelte:fragment slot="footer">
 			<Button form="new-query" type="submit" bind:disabled={loading}>
 				{#if loading}
 					<Spinner size={4} />
@@ -76,7 +77,7 @@
 					Submit
 				{/if}
 			</Button>
-			<Button color="alternative" on:click={() => newSearchModalOpen = false}>Cancel</Button>
+			<Button color="alternative" on:click={() => (newSearchModalOpen = false)}>Cancel</Button>
 		</svelte:fragment>
 	</Modal>
 </div>
@@ -99,18 +100,18 @@
 	{:else}
 		<div class="saved-searches">
 			{#each savedSearches as search}
-					<Card href={`/app/${search.id}`}>
-						<Heading tag="h4">
-							{search.query}
-						</Heading>
-						<Spacer spacing="15" />
+				<Card href={`/app/${search.id}`}>
+					<Heading tag="h4">
+						{search.query}
+					</Heading>
+					<Spacer spacing="15" />
 
-						<Hr />
-						<Spacer spacing="15" />
-						<P>
-							<b>Format:</b> <i>{search.vinylOnly ? 'Vinyl only' : 'All formats'}</i>
-						</P>
-					</Card>
+					<Hr />
+					<Spacer spacing="15" />
+					<P>
+						<b>Format:</b> <i>{search.vinylOnly ? 'Vinyl only' : 'All formats'}</i>
+					</P>
+				</Card>
 			{/each}
 		</div>
 	{/if}

@@ -1,57 +1,55 @@
-import type {RequestHandler} from "./$types";
-import type {SavedSearch} from "@prisma/client";
+import type { RequestHandler } from './$types';
 
-
-import {dbConnection} from "$db/dbConnection";
-import {jobCreator} from "$db/queue";
+import { dbConnection } from '$db/dbConnection';
+import { crawlerQueue } from '$db/queue';
 
 enum JobType {
-	GetAllSearchResults = "GetAllSearchResults"
-}
-
-interface CrawlerJob {
-	jobType: 'crawler',
-	query: SavedSearch,
+	GetAllSearchResults = 'GetAllSearchResults'
 }
 
 interface CronJobConfig {
-	jobType: JobType
+	jobType: JobType;
 }
 
-export const POST: RequestHandler = async function({request}) {
+export const POST: RequestHandler = async function ({ request }) {
 	try {
-		const body: CronJobConfig = await request.json()
+		const body: CronJobConfig = await request.json();
 
-		switch(body.jobType) {
-			case JobType.GetAllSearchResults:{
-				const prisma = dbConnection()
-				const savedSearches = await prisma.savedSearch.findMany()
+		switch (body.jobType) {
+			case JobType.GetAllSearchResults: {
+				const prisma = dbConnection();
+				const savedSearches = await prisma.savedSearch.findMany();
 
-				for (const search of savedSearches) {
-					const job: CrawlerJob = {
-						jobType: 'crawler',
-						query: search
-					}
+				const _createResult = await crawlerQueue.addBulk(
+					savedSearches.map((search) => {
+						return {
+							opts: {
+								attempts: 3
+							},
+							data: {
+								jobType: 'crawler',
+								query: search
+							}
+						};
+					})
+				);
 
-					await jobCreator.createJob(job).save()
-				}
-
-				return new Response("Acknowledged")
+				return new Response('Acknowledged');
 			}
 			default:
-				return new Response(`Unexpected job type: ${body.jobType}`)
+				return new Response(`Unexpected job type: ${body.jobType}`);
 		}
 	} catch (e) {
-		const error = e as Error
-		if (error.message.includes("JSON input")) {
-			return new Response("Bad JSON body", {
+		const error = e as Error;
+		if (error.message.includes('JSON input')) {
+			return new Response('Bad JSON body', {
 				status: 400
-			})
+			});
 		}
 
-		console.error(e)
-		return new Response("Something went wrong", {
+		console.error(e);
+		return new Response('Something went wrong', {
 			status: 500
-		})
+		});
 	}
-}
+};

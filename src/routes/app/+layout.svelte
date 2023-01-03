@@ -1,10 +1,10 @@
 <script>
 	import Icon from 'svelte-icons-pack/Icon.svelte';
-    import CgArrowLeft from 'svelte-icons-pack/cg/CgArrowLeft.js';
-    import {Button} from "flowbite-svelte";
+	import CgArrowLeft from 'svelte-icons-pack/cg/CgArrowLeft.js';
+	import { Button } from 'flowbite-svelte';
 
-    import { page } from '$app/stores';
-	import Spacer from "$lib/components/Spacer.svelte";
+	import { page } from '$app/stores';
+	import Spacer from '$lib/components/Spacer.svelte';
 </script>
 
 <Spacer spacing="30" />
@@ -20,7 +20,7 @@
 				<Spacer direction="horizontal" spacing="15" />
 				Back to list
 			</Button>
-			<br/>
+			<br />
 		{/if}
 		other links here
 	</aside>
@@ -37,13 +37,13 @@
 	aside {
 		order: -1;
 
-        margin: 0 auto; height: 700px; width: 250px
+		margin: 0 auto;
+		height: 700px;
+		width: 250px;
 	}
 
 	aside > a {
 		margin-left: auto;
 		display: block;
 	}
-
-
 </style>
