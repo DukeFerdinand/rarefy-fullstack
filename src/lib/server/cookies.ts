@@ -1,5 +1,5 @@
 import { dev } from '$app/environment';
-import { VERCEL_URL } from '$env/static/private';
+import { RENDER_EXTERNAL_HOSTNAME	 } from '$env/static/private';
 
 interface CookieOverrides {
 	path?: string;
@@ -9,7 +9,7 @@ interface CookieOverrides {
 	httpOnly?: boolean;
 }
 
-export function getCookieOptions(cookieHost: string = VERCEL_URL, overrides: CookieOverrides = {}) {
+export function getCookieOptions(cookieHost: string = RENDER_EXTERNAL_HOSTNAME, overrides: CookieOverrides = {}) {
 	if (cookieHost.includes(':')) {
 		// Assume that the : means a port number
 		cookieHost = cookieHost.slice(0, cookieHost.indexOf(':') + 1);
