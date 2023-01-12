@@ -58,7 +58,6 @@ export const actions = {
 			const cookieOptions = getCookieOptions(new URL(request.url).host);
 
 			cookies.set('rarefy_token', jwt, cookieOptions);
-			console.log(cookies.get('rarefy_token'));
 		} catch (e) {
 			console.error(e);
 

@@ -1,5 +1,4 @@
 import { dev } from '$app/environment';
-import { RENDER_EXTERNAL_HOSTNAME	 } from '$env/static/private';
 
 interface CookieOverrides {
 	path?: string;
@@ -9,10 +8,10 @@ interface CookieOverrides {
 	httpOnly?: boolean;
 }
 
-export function getCookieOptions(cookieHost: string = RENDER_EXTERNAL_HOSTNAME, overrides: CookieOverrides = {}) {
+export function getCookieOptions(cookieHost: string, overrides: CookieOverrides = {}) {
 	if (cookieHost.includes(':')) {
 		// Assume that the : means a port number
-		cookieHost = cookieHost.slice(0, cookieHost.indexOf(':') + 1);
+		cookieHost = cookieHost.slice(0, cookieHost.indexOf(':'));
 	}
 
 	return {
