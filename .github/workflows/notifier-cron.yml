@@ -1,11 +1,10 @@
-# Send a curl request every 3 hours via GitHub Actions
-
-name: Cron job
+name: Notifier Cron Job
 on:
   schedule:
-    - cron: '0 */3 * * *'
+    - cron: '00 01 * * *' # 1am utc - 10AM jst - 5pm pst?
+    - cron: '00 12 * * *' # 1pm utc - 10PM jst - 5am pst?
 jobs:
-  build:
+  run-scrape-job:
     runs-on: ubuntu-latest
     steps:
       - run: |
@@ -13,5 +12,5 @@ jobs:
                   -H 'Authorization: Bearer ${{ secrets.CRON_API_SECRET }}' \
                   -H 'Content-Type: application/json; charset=utf-8' \
                 -d $'{
-              "jobType": "GetAllSearchResults"
+              "jobType": "SendOutNotifications"
           }'

@@ -1,0 +1,22 @@
+# Send a curl request every 3 hours via GitHub Actions
+
+name: Web Crawler Cron Job
+on:
+  schedule:
+    - cron: '00 00 * * *' # 12am utc - 9AM jst
+#    - cron: '00 04 * * *' # 4am utc - 1PM jst
+#    - cron: '00 08 * * *' # 8am utc - 5PM jst
+    - cron: '00 12 * * *' # 12pm utc - 9PM jst
+#    - cron: '00 16 * * *' # 4pm utc - 1AM jst
+#    - cron: '00 20 * * *' # 8pm utc - 5AM jst
+jobs:
+  run-scrape-job:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          curl -X "POST" "https://www.rarefy.me/api/cron" \
+                  -H 'Authorization: Bearer ${{ secrets.CRON_API_SECRET }}' \
+                  -H 'Content-Type: application/json; charset=utf-8' \
+                -d $'{
+              "jobType": "GetAllSearchResults"
+          }'

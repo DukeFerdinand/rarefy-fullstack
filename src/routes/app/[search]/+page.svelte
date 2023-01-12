@@ -10,6 +10,7 @@
 
 	export let searchResults: DashboardSearchResult[];
 	$: searchResults = data.SearchResult;
+	$: console.log(searchResults);
 </script>
 
 <div>
@@ -19,5 +20,11 @@
 	<div>
 		<Spacer spacing="15" />
 		<P>Created: {search.createdAt.toLocaleString()}</P>
+
+		<div>
+			{#each searchResults as result}
+				<P>{result.title}</P>
+			{/each}
+		</div>
 	</div>
 </div>

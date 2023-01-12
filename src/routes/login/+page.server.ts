@@ -50,13 +50,15 @@ export const actions = {
 				id: user.id,
 				username: user.username,
 				email: user.email,
-				joined: user.joined
+				joined: user.joined,
+				role: user.role
 			};
 
 			const jwt = createJwt(locals.user);
 			const cookieOptions = getCookieOptions(new URL(request.url).host);
 
 			cookies.set('rarefy_token', jwt, cookieOptions);
+			console.log(cookies.get('rarefy_token'));
 		} catch (e) {
 			console.error(e);
 

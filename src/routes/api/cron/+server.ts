@@ -1,10 +1,11 @@
 import type { RequestHandler } from './$types';
 
 import { dbConnection } from '$db/dbConnection';
-import { crawlerQueue } from '$db/queue';
+import { crawlerQueue, notificationQueue } from '$db/queue';
 
 enum JobType {
-	GetAllSearchResults = 'GetAllSearchResults'
+	GetAllSearchResults = 'GetAllSearchResults',
+	SendOutNotifications = 'SendOutNotifications'
 }
 
 interface CronJobConfig {
@@ -20,7 +21,7 @@ export const POST: RequestHandler = async function ({ request }) {
 				const prisma = dbConnection();
 				const savedSearches = await prisma.savedSearch.findMany();
 
-				const _createResult = await crawlerQueue.addBulk(
+				await crawlerQueue.addBulk(
 					savedSearches.map((search) => {
 						return {
 							opts: {
@@ -35,6 +36,45 @@ export const POST: RequestHandler = async function ({ request }) {
 				);
 
 				return new Response('Acknowledged');
+			}
+			case JobType.SendOutNotifications: {
+				console.info("unimplemented");
+				const prisma = dbConnection()
+
+				const userWithSearches = await prisma.user.findMany({
+					include: {
+						SavedSearch: {
+							include: {
+								SearchResult: {
+									where: {
+										notified: false
+									}
+								}
+							}
+						}
+					}
+				})
+
+				const usersWithNewSearchResults = userWithSearches.map(user => {
+					user.SavedSearch = user.SavedSearch.filter(search => {
+						return search.SearchResult.length > 0
+					})
+
+					return user
+				}).filter(user => user.SavedSearch.length > 0)
+
+				const notifications = usersWithNewSearchResults.map((user) => {
+					return {
+						data: {
+							jobType: 'notification' as const,
+							data: user
+						}
+					}
+				})
+
+				await notificationQueue.addBulk(notifications)
+
+				return new Response(JSON.stringify(usersWithNewSearchResults));
 			}
 			default:
 				return new Response(`Unexpected job type: ${body.jobType}`);
