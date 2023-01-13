@@ -37,12 +37,7 @@ const serverAuth: Handle = async ({ event, resolve }) => {
 const auth: Handle = async ({ event, resolve }) => {
 	const authToken = event.cookies.get('rarefy_token');
 
-	// If the route is public, don't worry about auth
-	if (!authToken && routeStartsWithAnyOf(event.url.pathname, publicRoutes)) {
-		return resolve(event);
-	}
-
-	// If the route is private, verify the JWT
+	// If there's an auth token, try to verify it
 	if (authToken) {
 		try {
 			// Success? Add the user to the locals!
@@ -54,9 +49,13 @@ const auth: Handle = async ({ event, resolve }) => {
 			throw redirect(302, '/login');
 		}
 	} else {
+		// If the route is or a machine route, ignore with this handler
+		if (routeStartsWithAnyOf(event.url.pathname, [...publicRoutes, ...machineRoutes])) {
+			return resolve(event);
+		}
 		// If there's no JWT, redirect to the login page
 		throw redirect(302, '/login');
 	}
 };
 
-export const handle = sequence(logger, serverAuth, auth);
+export const handle = sequence(logger, auth, serverAuth);

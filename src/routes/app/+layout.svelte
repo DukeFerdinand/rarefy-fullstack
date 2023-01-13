@@ -16,17 +16,15 @@
 	<aside>
 		<Card>
 			{#if !$page.url.toString().endsWith('/app')}
-				<Button color='alternative' href="/app">
+				<Button color="alternative" href="/app">
 					<Icon src={CgArrowLeft} />
 					<Spacer direction="horizontal" spacing="15" />
 					Back to list
 				</Button>
-				<Spacer spacing='20' />
+				<Spacer spacing="20" />
 			{/if}
 
-			<Button color='green' href='/app/reports'>
-				Reports
-			</Button>
+			<Button color="green" href="/app/reports">Reports</Button>
 		</Card>
 	</aside>
 </section>

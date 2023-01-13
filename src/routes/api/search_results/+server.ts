@@ -10,14 +10,13 @@ export interface BuyeeSearchResult {
 	updatedAt: Date;
 	url: string;
 	bids: number;
-	images: string[]
+	images: string[];
 }
 
 interface SearchResults {
 	searchId: string;
 	results: BuyeeSearchResult[];
 }
-
 
 export const POST: RequestHandler = async function ({ request }) {
 	try {
@@ -54,13 +53,12 @@ export const POST: RequestHandler = async function ({ request }) {
 					endDate: result.endDate,
 					bids: result.bids || 0,
 					images: result.images
-
 				},
 				create: {
 					...result,
 					searchId: body.searchId
 				}
-			})
+			});
 		}
 
 		return new Response('OK');

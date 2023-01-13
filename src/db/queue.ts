@@ -11,7 +11,7 @@ interface CrawlerJob {
 
 export interface NotificationJob {
 	jobType: 'notification';
-	data: User & {SavedSearch: (SavedSearch & {SearchResult: SearchResult[]})[]};
+	data: User & { SavedSearch: (SavedSearch & { SearchResult: SearchResult[] })[] };
 }
 
 export const redisClient = createClient({

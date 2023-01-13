@@ -2,6 +2,4 @@
 	import { Heading } from 'flowbite-svelte';
 </script>
 
-<Heading>
-	Rare Reports
-</Heading>
+<Heading>Rare Reports</Heading>

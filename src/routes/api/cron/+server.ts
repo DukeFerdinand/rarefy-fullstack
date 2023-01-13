@@ -1,7 +1,7 @@
 import type { RequestHandler } from './$types';
 
 import { dbConnection } from '$db/dbConnection';
-import { crawlerQueue, notificationQueue } from '$db/queue';
+import { crawlerQueue } from '$db/queue';
 
 enum JobType {
 	GetAllSearchResults = 'GetAllSearchResults',
@@ -38,7 +38,7 @@ export const POST: RequestHandler = async function ({ request }) {
 				return new Response('Acknowledged');
 			}
 			case JobType.SendOutNotifications: {
-				const prisma = dbConnection()
+				const prisma = dbConnection();
 
 				const userWithSearches = await prisma.user.findMany({
 					include: {
@@ -52,15 +52,17 @@ export const POST: RequestHandler = async function ({ request }) {
 							}
 						}
 					}
-				})
+				});
 
-				const usersWithNewSearchResults = userWithSearches.map(user => {
-					user.SavedSearch = user.SavedSearch.filter(search => {
-						return search.SearchResult.length > 0
+				const usersWithNewSearchResults = userWithSearches
+					.map((user) => {
+						user.SavedSearch = user.SavedSearch.filter((search) => {
+							return search.SearchResult.length > 0;
+						});
+
+						return user;
 					})
-
-					return user
-				}).filter(user => user.SavedSearch.length > 0)
+					.filter((user) => user.SavedSearch.length > 0);
 
 				const notifications = usersWithNewSearchResults.map((user) => {
 					return {
@@ -68,10 +70,10 @@ export const POST: RequestHandler = async function ({ request }) {
 							jobType: 'notification' as const,
 							data: user
 						}
-					}
-				})
+					};
+				});
 
-				await notificationQueue.addBulk(notifications)
+				// await notificationQueue.addBulk(notifications)
 
 				return new Response('Acknowledged');
 			}
