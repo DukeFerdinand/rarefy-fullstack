@@ -1,16 +1,16 @@
 name: Notifier Cron Job
 on:
-  schedule:
-    - cron: '00 01 * * *' # 1am utc - 10AM jst - 5pm pst?
-    - cron: '00 12 * * *' # 1pm utc - 10PM jst - 5am pst?
+    schedule:
+        - cron: '00 01 * * *' # 1am utc - 10AM jst - 5pm pst?
+        - cron: '00 12 * * *' # 1pm utc - 10PM jst - 5am pst?
 jobs:
-  run-scrape-job:
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          curl -X "POST" "https://www.rarefy.me/api/cron" \
-                  -H 'Authorization: Bearer ${{ secrets.CRON_API_SECRET }}' \
-                  -H 'Content-Type: application/json; charset=utf-8' \
-                -d $'{
-              "jobType": "SendOutNotifications"
-          }'
+    run-scrape-job:
+        runs-on: ubuntu-latest
+        steps:
+            - run: |
+                  curl -X "POST" "https://www.rarefy.me/api/cron" \
+                          -H 'Authorization: Bearer ${{ secrets.CRON_API_SECRET }}' \
+                          -H 'Content-Type: application/json; charset=utf-8' \
+                        -d $'{
+                      "jobType": "SendOutNotifications"
+                  }'

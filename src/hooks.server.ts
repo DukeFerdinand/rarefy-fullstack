@@ -11,7 +11,9 @@ const logger: Handle = async ({ event, resolve }) => {
 	const result = await resolve(event);
 
 	console.log(
-		`${event.request.method} [${result.status}] ${event.url.pathname} took ${Date.now() - start}ms`
+		`${event.request.method} [${result.status}] ${event.url.pathname} took ${
+			Date.now() - start
+		}ms`
 	);
 
 	return result;

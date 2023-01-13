@@ -64,8 +64,8 @@
 
 				<Spacer spacing="15" />
 				<P>
-					This interface is a WIP, please bear with me as more options will be added for things like
-					Platform, exclude terms, etc. :)
+					This interface is a WIP, please bear with me as more options will be added for
+					things like Platform, exclude terms, etc. :)
 				</P>
 			</Label>
 		</form>
@@ -77,7 +77,8 @@
 					Submit
 				{/if}
 			</Button>
-			<Button color="alternative" on:click={() => (newSearchModalOpen = false)}>Cancel</Button>
+			<Button color="alternative" on:click={() => (newSearchModalOpen = false)}>Cancel</Button
+			>
 		</svelte:fragment>
 	</Modal>
 </div>

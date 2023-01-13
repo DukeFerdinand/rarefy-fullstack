@@ -22,7 +22,9 @@ export const POST: RequestHandler = async function ({ request }) {
 	try {
 		const contentType = request.headers.get('Content-Type');
 		if (!contentType?.startsWith('application/json')) {
-			return new Response('Bad content type, expected application/json, received: ' + contentType);
+			return new Response(
+				'Bad content type, expected application/json, received: ' + contentType
+			);
 		}
 
 		const body: SearchResults = await request.json();

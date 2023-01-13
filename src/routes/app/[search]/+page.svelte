@@ -89,8 +89,8 @@
 						<TableBodyRow>
 							<TableBodyCell colspan="4">
 								<P style="text-align: center">
-									No search results yet!<br /> Searches are run at 9AM and 9PM JST, so please check back
-									later :)
+									No search results yet!<br /> Searches are run at 9AM and 9PM JST,
+									so please check back later :)
 								</P>
 							</TableBodyCell>
 						</TableBodyRow>
