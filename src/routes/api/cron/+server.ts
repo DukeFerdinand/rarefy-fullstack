@@ -76,7 +76,9 @@ export const POST: RequestHandler = async function ({ request }) {
 				return new Response('Acknowledged');
 			}
 			default:
-				return new Response(`Unexpected job type: ${body.jobType}`);
+				return new Response(`Unexpected job type: ${body.jobType}`, {
+					status: 400
+				});
 		}
 	} catch (e) {
 		const error = e as Error;
