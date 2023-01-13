@@ -38,7 +38,6 @@ export const POST: RequestHandler = async function ({ request }) {
 				return new Response('Acknowledged');
 			}
 			case JobType.SendOutNotifications: {
-				console.info("unimplemented");
 				const prisma = dbConnection()
 
 				const userWithSearches = await prisma.user.findMany({
@@ -74,7 +73,7 @@ export const POST: RequestHandler = async function ({ request }) {
 
 				await notificationQueue.addBulk(notifications)
 
-				return new Response(JSON.stringify(usersWithNewSearchResults));
+				return new Response('Acknowledged');
 			}
 			default:
 				return new Response(`Unexpected job type: ${body.jobType}`);
