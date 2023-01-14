@@ -49,10 +49,10 @@
 	$: search = data;
 
 	export let searchResults: DashboardSearchResult[];
-	$: searchResults = SortUtils.sortBy(sortBy || SortUtils.Option.NewlyListed, data.SearchResult);
+	$: searchResults = SortUtils.sortBy(sortBy ?? SortUtils.Option.NewlyListed, data.SearchResult);
 </script>
 
-<div>
+<div class='w-full'>
 	<Heading>
 		{search.query}
 	</Heading>
@@ -66,17 +66,17 @@
 			</div>
 		</div>
 
-		<div style='overflow-x: auto; width: 100%'>
+		<div>
 			<Spacer spacing="25" />
 			<Table style='table-layout: auto'>
 				<TableHead>
 					<TableBodyCell>Listing</TableBodyCell>
 					<TableHeadCell>Thumbnail</TableHeadCell>
-					<TableHeadCell>Price</TableHeadCell>
-					<TableHeadCell>Buyout Price</TableHeadCell>
-					<TableHeadCell>Listing Title</TableHeadCell>
-					<TableHeadCell>Start Date</TableHeadCell>
-					<TableHeadCell>End Date</TableHeadCell>
+					<TableHeadCell class='whitespace-nowrap'>Price</TableHeadCell>
+					<TableHeadCell class='whitespace-nowrap'>Buyout Price</TableHeadCell>
+					<TableHeadCell class='whitespace-nowrap'>Listing Title</TableHeadCell>
+					<TableHeadCell class='whitespace-nowrap'>Start Date</TableHeadCell>
+					<TableHeadCell class='whitespace-nowrap'>End Date</TableHeadCell>
 					<TableHeadCell>Actions</TableHeadCell>
 				</TableHead>
 				<TableBody>
@@ -94,23 +94,27 @@
 									/>
 								</TableBodyCell>
 								<TableBodyCell>
-									<P>{result.currentPrice}</P>
+									<P class='whitespace-nowrap'>{result.currentPrice}</P>
 								</TableBodyCell>
 								<TableBodyCell>
-									<P color='text-red-500'>{result.buyoutPrice || '-'}</P>
+									{#if result.buyoutPrice}
+										<P color='text-red-500' class='whitespace-nowrap'>{result.buyoutPrice}</P>
+									{:else}
+										<P>-</P>
+									{/if}
 								</TableBodyCell>
 								<TableBodyCell>
-									<P>{result.title}</P>
+									<P class='w-60'>{result.title}</P>
 								</TableBodyCell>
 								<TableBodyCell>
-									<P>
+									<P class='whitespace-nowrap'>
 										{result.startDate.toLocaleDateString()}
 										<br />
 										{result.startDate.toLocaleTimeString()} JST
 									</P>
 								</TableBodyCell>
 								<TableBodyCell>
-									<P>
+									<P class='whitespace-nowrap'>
 										{result.endDate.toLocaleDateString()}
 										<br />
 										{result.endDate.toLocaleTimeString()} JST

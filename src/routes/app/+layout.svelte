@@ -1,7 +1,7 @@
 <script>
 	import Icon from 'svelte-icons-pack/Icon.svelte';
 	import CgArrowLeft from 'svelte-icons-pack/cg/CgArrowLeft.js';
-	import { Button, Card } from 'flowbite-svelte';
+	import { Button, P } from 'flowbite-svelte';
 
 	import { page } from '$app/stores';
 	import Spacer from '$lib/components/Spacer.svelte';
@@ -14,25 +14,29 @@
 		<slot />
 	</div>
 	<aside>
-		<Card>
+		<div class='flex flex-row items-center'>
 			{#if !$page.url.toString().endsWith('/app')}
-				<Button color="alternative" href="/app">
+				<Button class='flex-grow-0' color="alternative" href="/app">
 					<Icon src={CgArrowLeft} />
 					<Spacer direction="horizontal" spacing="15" />
 					Back to list
 				</Button>
-				<Spacer spacing="20" />
+				<Spacer spacing="20" direction='horizontal' />
 			{/if}
 
-			<Button color="green" href="/app/reports">Reports</Button>
-		</Card>
+			<Spacer auto direction='horizontal' />
+			<P>Pages:</P>
+			<Spacer spacing="20" direction='horizontal' />
+
+			<Button class='flex-grow-0' color="green" href="/app/reports">Reports</Button>
+		</div>
 	</aside>
 </section>
 
 <style>
 	section {
 		display: grid;
-		grid-template-columns: 200px 1fr;
+		grid-template-columns: 1fr;
 		grid-gap: 30px;
 		padding: 0 30px;
 	}
