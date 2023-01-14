@@ -59,6 +59,7 @@ model SearchResult {
   // Price and bids
   startingPrice String
   currentPrice  String
+  buyoutPrice   String?
   endPrice      String?
   bids          Int     @default(0)
 

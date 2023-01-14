@@ -43,6 +43,16 @@ export const POST: RequestHandler = async function ({ request }) {
 				}
 			}
 
+			let buyoutPrice: string | null = null;
+			// if result.currentPrice has multiple instances of 'yen', then you can do a buyout
+			// the example string has a value of 100 yen and a buyout price of 200 yen
+			// 100yen200yen
+			if (result.currentPrice && (result.currentPrice.match(/yen/g)?.length || 0) > 1) {
+				console.log('buyout price found');
+				buyoutPrice = result.currentPrice.split(' yen')[1] + ' yen'
+				result.currentPrice = result.currentPrice.split(' yen')[0] + ' yen'
+			}
+
 			await prisma.searchResult.upsert({
 				where: {
 					url: result.url
@@ -52,6 +62,7 @@ export const POST: RequestHandler = async function ({ request }) {
 					updatedAt: result.updatedAt,
 
 					currentPrice: result.currentPrice,
+					...(buyoutPrice && { buyoutPrice }),
 					endDate: result.endDate,
 					bids: result.bids || 0,
 					images: result.images

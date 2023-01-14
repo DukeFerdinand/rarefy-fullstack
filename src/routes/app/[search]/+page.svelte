@@ -5,7 +5,7 @@
 		Button,
 		Heading,
 		Img,
-		P,
+		P, Select,
 		Table,
 		TableBody,
 		TableBodyCell,
@@ -17,6 +17,31 @@
 	import CgMoreVerticalAlt from 'svelte-icons-pack/cg/CgMoreVerticalAlt.js';
 
 	import Spacer from '$lib/components/Spacer.svelte';
+	import * as SortUtils from './sortUtils';
+
+	let sortBy: SortUtils.Option = SortUtils.Option.NewlyListed;
+	let sortByOptions = [
+		{
+			value: SortUtils.Option.HasBuyoutOption,
+			name: "Has Buyout Option"
+		},
+		{
+			value: SortUtils.Option.LowestPrice,
+			name: "Lowest Price First"
+		},
+		{
+			value: SortUtils.Option.HighestPrice,
+			name: "Highest Price First"
+		},
+		{
+			value: SortUtils.Option.NewlyListed,
+			name: "Newly Listed"
+		},
+		{
+			value: SortUtils.Option.EndingSoonest,
+			name: "Ending Soonest"
+		},
+	]
 
 	export let data: DashboardSavedSearch & { SearchResult: DashboardSearchResult[] };
 
@@ -24,8 +49,7 @@
 	$: search = data;
 
 	export let searchResults: DashboardSearchResult[];
-	$: searchResults = data.SearchResult;
-	$: console.log(searchResults);
+	$: searchResults = SortUtils.sortBy(sortBy || SortUtils.Option.NewlyListed, data.SearchResult);
 </script>
 
 <div>
@@ -35,13 +59,21 @@
 	<div>
 		<Spacer spacing="15" />
 		<P>Created: {search.createdAt.toLocaleString()}</P>
+        <!--	Controls	-->
+		<div class='mt-10 flex'>
+			<div class='ml-auto w-60'>
+				<Select placeholder='Sort By...' items={sortByOptions} bind:value={sortBy}/>
+			</div>
+		</div>
 
-		<div>
+		<div style='overflow-x: auto; width: 100%'>
 			<Spacer spacing="25" />
-			<Table>
+			<Table style='table-layout: auto'>
 				<TableHead>
-					<TableBodyCell />
+					<TableBodyCell>Listing</TableBodyCell>
 					<TableHeadCell>Thumbnail</TableHeadCell>
+					<TableHeadCell>Price</TableHeadCell>
+					<TableHeadCell>Buyout Price</TableHeadCell>
 					<TableHeadCell>Listing Title</TableHeadCell>
 					<TableHeadCell>Start Date</TableHeadCell>
 					<TableHeadCell>End Date</TableHeadCell>
@@ -60,6 +92,12 @@
 										src={result.images[0]}
 										style="width: 100px; border-radius: 10px"
 									/>
+								</TableBodyCell>
+								<TableBodyCell>
+									<P>{result.currentPrice}</P>
+								</TableBodyCell>
+								<TableBodyCell>
+									<P color='text-red-500'>{result.buyoutPrice || '-'}</P>
 								</TableBodyCell>
 								<TableBodyCell>
 									<P>{result.title}</P>
