@@ -18,7 +18,7 @@
 		"@popperjs/core": "^2.11.6",
 		"@sveltejs/adapter-auto": "^1.0.0",
 		"@sveltejs/adapter-vercel": "^1.0.0",
-		"@sveltejs/kit": "^1.0.0",
+		"@sveltejs/kit": "^1.7.1",
 		"@types/bcrypt": "^5.0.0",
 		"@types/bull": "^4.10.0",
 		"@types/jsonwebtoken": "^8.5.9",
